@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import BubbleSort # I don't care bout efficiency right now
 from Binary import Binary
 from random import random
@@ -20,16 +21,13 @@ def sort(l):
 def mutate(l, num):
 	new = list()
 	for i in range(num):
-		print('mutate:')
 		index = floor(random() * len(l))
 		member = l[index]
 		index = floor(random() * len(member))
-		print(member)
 		if member[index] == 1:
 			member[index] = 0
 		else:
 			member[index] = 1
-		print(member)
 		new.append(member)
 	return new
 
@@ -58,23 +56,25 @@ def cross(l1, l2):
 		l2.extend(ltemp1)
 	return [l1, l2]
 
-def run(times):
-	pop = generate(5)
-	print("original population")
+def out(pop):
 	for val in pop:
-		sys.stdout.write(str(val.toInt()) + ": k")
 		val.out()
 
-if __name__ == '__main__':
+def run(times):
 	pop = generate(5)
-	print('Sample:')
-	for val in pop:
-		print(val.toInt())
-		val.out()
-	print('--------------------------')
-	pop = sort(pop)
-	for val in pop:
-		val.out()
-	pop = mixPopulation(pop)
-	for val in pop:
-		val.out()
+	top = list()
+	print("original population")
+	out(pop)
+	print('----------------')
+	for i in range(times):
+		pop = sort(pop)
+		pop = mixPopulation(pop)
+		top.append(pop[0].toInt())
+		#out(pop)
+		#print()
+	plt.plot(top)
+	pop[0].out()
+	plt.show()
+
+if __name__ == '__main__':
+	run(100)
