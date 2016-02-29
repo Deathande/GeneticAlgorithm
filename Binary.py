@@ -40,5 +40,4 @@ class Binary:
 
 if __name__ == '__main__':
 	b = Binary(16)
-	print(b.bs)
-	print(b.toInt())
+	print(b.out())
