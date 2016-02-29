@@ -47,7 +47,7 @@ def mixPopulation(l):
 
 def cross(l1, l2):
 	if len(l1) == len(l2):
-		pivot = floor(len(l1) * .40)
+		pivot = floor(random() * len(l1))
 		ltemp1 = l1[pivot:len(l1)]
 		ltemp2 = l2[pivot:len(l2)]
 		l1 = l1[0:pivot]
@@ -68,13 +68,15 @@ def run(times):
 	print('----------------')
 	for i in range(times):
 		pop = sort(pop)
-		pop = mixPopulation(pop)
 		top.append(pop[0].toInt())
+		pop = mixPopulation(pop)
 		#out(pop)
 		#print()
 	plt.plot(top)
+	pop = sort(pop)
+	top.append(pop[0].toInt())
 	pop[0].out()
 	plt.show()
 
 if __name__ == '__main__':
-	run(100)
+	run(50)
