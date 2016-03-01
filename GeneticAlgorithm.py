@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
-import BubbleSort # I don't care bout efficiency right now
+import QuickSort
+import BubbleSort
 from Binary import Binary
 from random import random
 from math import floor
@@ -15,7 +16,8 @@ def f(x):
 	return x.toInt()**2
 
 def sort(l):
-	l = BubbleSort.sort(l, f)
+	l = QuickSort.sort(l, f)
+	#l = BubbleSort.sort(l, f)
 	return l
 
 def mutate(l, num):

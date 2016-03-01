@@ -17,6 +17,8 @@ class Binary:
 		else:
 			print('Bad type')
 			exit(1)
+	def __lt__(self, other):
+		return self.toInt() < other.toInt()
 
 	def toInt(self):
 		s = len(self.bs)
