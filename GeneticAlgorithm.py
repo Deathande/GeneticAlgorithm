@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import BubbleSort # I don't care bout efficiency right now
 from Binary import Binary
 from random import random
+from random import randint
 from math import floor
 
 def generate(size):
@@ -31,19 +32,23 @@ def mutate(l, num):
 		new.append(member)
 	return new
 
-def mixPopulation(l):
-	newlist = list()
-	olength = len(l)
-	for i in range(floor(len(l) / 2)):
-		index = floor(random() * len(l))
-		l1 = l.pop(index)
-		index = floor(random() * len(l))
-		l2 = l.pop(index)
-		newlist.extend(cross(l1.bs, l2.bs))
-	newlist.extend(mutate(newlist, olength - len(newlist)))	
-	for i in range(len(newlist)):
-		newlist[i] = Binary(newlist[i])
-	return newlist
+def mixMutate(l, pct=.5):
+	index = int(len(l) * pct)
+	wl = l[0:index]
+	print(len(wl))
+	nl = list()
+	while len(wl) > 1:
+		index = randint(0, len(wl)-1)
+		v1 = wl.pop(index)
+		index = randint(0, len(wl)-1)
+		v2 = wl.pop(index)
+		nl.extend(cross(v1.bs, v2.bs))
+	if len(wl) == 1:
+		index = randint(0, len(nl)-1)
+		val = nl[index]
+		nl.extend(cross(val, wl[0].bs))
+	nl.extend(mutate(nl, len(l) - len(nl)))
+	return nl
 
 def cross(l1, l2):
 	if len(l1) == len(l2):
@@ -55,10 +60,6 @@ def cross(l1, l2):
 		l1.extend(ltemp2)
 		l2.extend(ltemp1)
 	return [l1, l2]
-
-def out(pop):
-	for val in pop:
-		val.out()
 
 def run(times):
 	pop = generate(5)
@@ -77,6 +78,3 @@ def run(times):
 	top.append(pop[0].toInt())
 	pop[0].out()
 	plt.show()
-
-if __name__ == '__main__':
-	run(30)

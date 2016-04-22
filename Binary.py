@@ -15,8 +15,16 @@ class Binary:
 				self.bs.append(0)
 			self.bs.reverse()
 		else:
-			print('Bad type')
-			exit(1)
+			raise Exception ("Bad Type")
+	
+	def __str__(self):
+		s = ""
+		for val in self.bs:
+			s += str(val) + " "
+		return s
+	
+	def __len__(self):
+		return len(self.bs)
 
 	def toInt(self):
 		s = len(self.bs)
