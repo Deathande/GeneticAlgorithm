@@ -26,11 +26,19 @@ def sort(l):
 if __name__ == '__main__':
 	population = generate(10)
 	tops = list()
+	m = population[0]
 	for i in range(20):
 		population = sort(population)
-		population = GeneticAlgorithm.mixMutate(population)
+		print("Iteration " + str(i))
 		for item in population:
-			item = Binary(item)
-		for i in population:
-			print(i)
-		tops.append(population[-1])
+			print(item)
+		print()
+		tops.append(population[0].toInt())
+		if h(m.toInt()) < h(population[0].toInt()):
+			m = population[0]
+		population = GeneticAlgorithm.mixMutate(population)
+		for i in range(len(population)):
+			population[i] = Binary(population[i])
+	print(m)
+	plt.plot(tops)
+	plt.show()
